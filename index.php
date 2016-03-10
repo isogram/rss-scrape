@@ -116,6 +116,7 @@ class FetchMyRss
 
         $this->insertIntoDatabase();
 
+        return true;
     }
 
     private function setFeedList() {
@@ -161,12 +162,12 @@ class FetchMyRss
         $count = 0;
         foreach ($this->dataToInsert as $data) {
             $insert = $this->db->insert("inpanel_rss_tbl", $data);
-            if ($insert) {
+            if ($insert !== 0) {
                 $count++;
             }
         }
 
-        if ($count && $this->slack) {
+        if ($count > 0 && $this->slack) {
             $this->slack->send("Halo, ada *" . $count . "* berita baru di database RSS kita, cek ya!");
         }
     }
