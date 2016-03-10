@@ -160,11 +160,14 @@ class FetchMyRss
 
     private function insertIntoDatabase(){
         $count = 0;
+        $arrCounter = [];
         foreach ($this->dataToInsert as $data) {
             $insert = $this->db->insert("inpanel_rss_tbl", $data);
-            if ($insert !== 0) {
+            if ($insert > 0 && !in_array($insert, $arrCounter)) {
                 $count++;
+                array_push($arrCounter, $insert);
             }
+
         }
 
         if ($count > 0 && $this->slack) {
