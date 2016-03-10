@@ -38,7 +38,7 @@ class FetchMyRss
     }
 
     function __destruct() {
-        $this->setLastSyncUpdate();        
+        $this->setLastSyncUpdate();
     }
 
     public function fetch($data = [])
@@ -53,13 +53,13 @@ class FetchMyRss
         $feed->remove_div(true);
         $feed->enable_cache(true);
         $feed->set_cache_location( __DIR__ . '/cache');
-        $feed->set_cache_duration(1200);
+        $feed->set_cache_duration(600);
         $feed->init();
         $feed->handle_content_type();
 
         $dataToInsert = [];
         foreach ($feed->get_items() as $key => $item){
-            
+
             $link = $item->get_permalink();
             $guid = $item->get_id();
             $published_at = date('Y-m-d H:i:s', strtotime($item->get_date()));
