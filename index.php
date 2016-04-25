@@ -54,6 +54,7 @@ class FetchMyRss
         $feed->enable_cache(true);
         $feed->set_cache_location( __DIR__ . '/cache');
         $feed->set_cache_duration(600);
+        $feed->force_feed(true);
         $feed->init();
         $feed->handle_content_type();
 
