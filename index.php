@@ -122,7 +122,7 @@ class FetchMyRss
 
     private function setFeedList() {
 
-        $feeds = $this->db->query("SELECT * FROM inpanel_rss_mst_portals")->fetchAll(PDO::FETCH_ASSOC);
+        $feeds = $this->db->query("SELECT * FROM inpanel_rss_mst_portals WHERE active=1")->fetchAll(PDO::FETCH_ASSOC);
         $list = array();
         foreach ($feeds as $feed) {
             $list['dataByKeyUrl'][$feed['url_feed']] = $feed;
